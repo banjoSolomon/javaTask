@@ -11,7 +11,7 @@ public class AccountTest {
 
     @BeforeEach
     public void setUp(){
-        account = new Account("Banjo Solomon", "pin","balance", 4456564);
+        account = new Account("Banjo Solomon", 2468, "balance", 4456564);
 
     }
 
@@ -25,13 +25,13 @@ public class AccountTest {
         int initialBalance = 10_000;
         account.deposit(initialBalance);
 
-        assertEquals(initialBalance,account.getBalance());
+        assertEquals(initialBalance, account.getBalance("Banjo Solomon", 2468));
     }
 
 
     @Test
     public void testAccountNumber(){
-        Account checkAccount = new Account("Banjo Solomon", "3455", "0", 4456564);
+        Account checkAccount = new Account("Banjo Solomon", 2468, "0", 4456564);
         int accountNumber = checkAccount.getAccountNumber();
 
         assertNotEquals(0,accountNumber);
@@ -39,26 +39,26 @@ public class AccountTest {
     }
     @Test
     public void testAccountCanDeposit(){
-        Account myAccount = new Account("myAccount", "pin", "balance", 4456564);
-        int initialBalance = myAccount.getBalance();
+        Account myAccount = new Account("myAccount", 2468, "balance", 4456564);
+        int initialBalance = myAccount.getBalance("Banjo Solomon", 2468);
         int depositAmount = 5000;
         myAccount.deposit(depositAmount);
 
         int expectedBalance = initialBalance + depositAmount;
-        assertEquals(expectedBalance,myAccount.getBalance());
+        assertEquals(expectedBalance, myAccount.getBalance("Banjo Solomon", 2468));
 
 
     }
     @Test
     public void testAccountCanWithdraw(){
-        Account  myAccount = new Account("myAccount", "pin", "balance", 4456564);
+        Account myAccount = new Account("myAccount", 2468, "balance", 4456564);
         int initialBalance = 10000;
         myAccount.deposit(initialBalance);
         int withdrawalAmount = 500;
         myAccount.withdraw(withdrawalAmount);
 
         int expectedBalance = initialBalance - withdrawalAmount;
-        assertEquals(expectedBalance,myAccount.getBalance());
+        assertEquals(expectedBalance, myAccount.getBalance("Banjo Solomon", 2468));
 
 
     }
@@ -66,7 +66,7 @@ public class AccountTest {
     public void testToCheckAccountBalance(){
         int initialBalance = 10_000;
         account.deposit(initialBalance);
-        assertEquals(initialBalance,account.getBalance());
+        assertEquals(initialBalance, account.getBalance("Banjo Solomon", 2468));
 
     }
     @Test

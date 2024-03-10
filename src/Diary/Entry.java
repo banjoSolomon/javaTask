@@ -23,6 +23,7 @@ public class Entry {
 
     public String getName() {
         return name;
+
     }
 
     public String getPassword() {
@@ -40,6 +41,7 @@ public class Entry {
     public void setId(int newId) {
         this.id = newId;
     }
+
 
     public String getTitle() {
         return name;

@@ -35,7 +35,7 @@ public class MyBank {
     }
 
     public void transfer(Account accountSending, Account accountReceiving, int amount) {
-        if(accountSending.getBalance() >= amount){
+        if (accountSending.getBalance("Banjo Solomon", 2468) >= amount) {
             accountSending.withdraw(amount);
             accountReceiving.deposit(amount);
         }else{

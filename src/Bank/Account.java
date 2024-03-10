@@ -8,13 +8,13 @@ public class Account {
     private static final int PIN_LENGTH = 4;
     private boolean pin;
 
-    public Account(String accountName, String pin, String balance, int accountNumber) {
+    public Account(String accountName, int pin, String balance, int accountNumber) {
         this.accountNumber = nextAccountNumber++;
         this.balance = 0;
         this.accountName = accountName;
     }
 
-    public int getBalance() {
+    public int getBalance(String userName, int pin) {
         return balance;
     }
 
