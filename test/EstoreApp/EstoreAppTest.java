@@ -1,8 +1,6 @@
 package EstoreApp;
 
-import MyEstore.Estore;
-import MyEstore.Product;
-import MyEstore.ProductCategory;
+import MyEstore.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +11,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EstoreAppTest {
     private Estore e_store;
     private Product product;
+    private Admin admin;
+    private User user;
+    private Seller seller;
 
     @BeforeEach
     public void setUp() {
         e_store = new Estore("Banjo Solomon", "2468");
         product = new Product("Laptop", 799.99, 289, "This is a high performance gaming laptop.");
+        admin = new Admin("Pete Jackson", "4578");
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
+        seller = new Seller("Ore", "2245", "S12345");
     }
 
     @Test
@@ -27,8 +31,32 @@ public class EstoreAppTest {
     }
 
     @Test
+    public void testUserHasAage() {
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
+        assertEquals(24, user.getAge());
+
+    }
+
+    @Test
+    public void testUserHasAPhoneNumber() {
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
+        assertEquals("Damseldee@gmail.com", user.getEmail());
+
+    }
+
+    @Test
+    public void testUserHasHomeAddress() {
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
+        assertEquals("7, adebare Street Ogudu lagos", user.getHomeAddress());
+
+    }
+
+
+
+    @Test
     public void testUserNameHasAPassword() {
         e_store = new Estore("Banjo Solomon", "2468");
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         String password = "2468";
         e_store.setPassword(password);
         String actualPassword = e_store.getPassword();
@@ -39,6 +67,7 @@ public class EstoreAppTest {
     @Test
     public void testUserVerificationValid() {
         e_store = new Estore("Banjo Solomon", "2468");
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         String enteredPassword = "2468";
         boolean isVerificationValid = e_store.verifyUser(enteredPassword);
         assertTrue(isVerificationValid);
@@ -49,6 +78,7 @@ public class EstoreAppTest {
     @Test
     public void testUserLoginWithValidCredentials() {
         e_store = new Estore("Banjo Solomon", "2468");
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         boolean isLoginSuccessful = e_store.verifyUser("2468");
         assertTrue(isLoginSuccessful, "login should be successful with correct password");
         assertEquals("Banjo Solomon", e_store.getUserName());
@@ -59,6 +89,7 @@ public class EstoreAppTest {
     @Test
     public void testUserVerificationInvalid() {
         e_store = new Estore("Banjo Solomon", "2468");
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         String enteredPassword = "2567";
         boolean isVerificationInvalid = e_store.VerificationInvalid(enteredPassword);
         assertTrue(isVerificationInvalid);
@@ -68,6 +99,7 @@ public class EstoreAppTest {
     @Test
     public void testAddProductToStore() {
         e_store = new Estore("Banjo Solomon", "2468");
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         product = new Product("Laptop", 799.99, 289, "This is a high performance gaming laptop.");
         e_store.addProduct(product);
         List<Product> products = e_store.getProduct();
@@ -78,6 +110,7 @@ public class EstoreAppTest {
 
     @Test
     public void testGetProductName() {
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         e_store = new Estore("Banjo Solomon", "2468");
         product = new Product("Laptop", 799.99, 289, "This is a high performance gaming laptop.");
         assertEquals("Laptop", product.getProductName());
@@ -86,6 +119,7 @@ public class EstoreAppTest {
 
     @Test
     public void testGetProductPrice() {
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         e_store = new Estore("Banjo Solomon", "2468");
         product = new Product("Laptop", 799.99, 289, "This is a high performance gaming laptop.");
         assertEquals(799.99, product.getPrice());
@@ -94,6 +128,7 @@ public class EstoreAppTest {
 
     @Test
     public void testProductHasA_Id() {
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         e_store = new Estore("Banjo Solomon", "2468");
         product = new Product("Laptop", 799.99, 289, "This is a high performance gaming laptop.");
         assertNotNull(product.getProductId());
@@ -237,6 +272,7 @@ public class EstoreAppTest {
     @Test
     public void testCheckOutWithValidData() {
         e_store = new Estore("Banjo Solomon", "2468");
+        user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         Product laptop = new Product("Laptop", 888.99, 289, "This is a high performance gaming laptop.");
         Product iphone = new Product("I-Phone", 799.99, 289, "This is a high performance I-Phone.");
         e_store.addToCart(laptop);
@@ -268,6 +304,18 @@ public class EstoreAppTest {
         assertFalse(cartProductsAfterRemoval.contains(laptop));
         assertTrue(cartProductsAfterRemoval.contains(iphone));
 
+    }
+
+    @Test
+    public void testAdminHasAUserName() {
+        assertEquals("Pete Jackson", admin.getUserName());
+
+    }
+
+    @Test
+    public void testSellerHasAnId() {
+        seller = new Seller("Ore", "2245", "S12345");
+        assertEquals("S12345", seller.getSellerId());
 
     }
 

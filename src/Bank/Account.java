@@ -8,10 +8,11 @@ public class Account {
     private static final int PIN_LENGTH = 4;
     private boolean pin;
 
-    public Account(String accountName, int pin, String balance, int accountNumber) {
+    public Account(String accountName, int pin, int accountNumber) {
         this.accountNumber = nextAccountNumber++;
         this.balance = 0;
         this.accountName = accountName;
+
     }
 
     public int getBalance(String userName, int pin) {
@@ -22,11 +23,8 @@ public class Account {
         balance += depositAmount;
     }
 
-    public void withdraw(int amount) {
-
-        if(balance >= amount)
-            balance -= amount;
-        else throw new IllegalArgumentException("Insufficient funds");
+    public static int getNextAccountNumber() {
+        return nextAccountNumber++;
     }
 
 
@@ -44,5 +42,15 @@ public class Account {
         return accountNumber;
     }
 
+    public void withdraw(int amount) {
+        if (amount <= 0) throw new IllegalArgumentException("Invalid Amount");
 
+        if(balance >= amount)
+            balance -= amount;
+        else throw new IllegalArgumentException("Insufficient funds");
+    }
+
+    public int getBalance() {
+        return balance;
+    }
 }

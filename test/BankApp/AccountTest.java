@@ -11,7 +11,7 @@ public class AccountTest {
 
     @BeforeEach
     public void setUp(){
-        account = new Account("Banjo Solomon", 2468, "balance", 4456564);
+        account = new Account("Banjo Solomon", 2468, 4456564);
 
     }
 
@@ -31,7 +31,7 @@ public class AccountTest {
 
     @Test
     public void testAccountNumber(){
-        Account checkAccount = new Account("Banjo Solomon", 2468, "0", 4456564);
+        Account checkAccount = new Account("Banjo Solomon", 2468, 4456564);
         int accountNumber = checkAccount.getAccountNumber();
 
         assertNotEquals(0,accountNumber);
@@ -39,7 +39,7 @@ public class AccountTest {
     }
     @Test
     public void testAccountCanDeposit(){
-        Account myAccount = new Account("myAccount", 2468, "balance", 4456564);
+        Account myAccount = new Account("myAccount", 2468, 4456564);
         int initialBalance = myAccount.getBalance("Banjo Solomon", 2468);
         int depositAmount = 5000;
         myAccount.deposit(depositAmount);
@@ -51,7 +51,7 @@ public class AccountTest {
     }
     @Test
     public void testAccountCanWithdraw(){
-        Account myAccount = new Account("myAccount", 2468, "balance", 4456564);
+        Account myAccount = new Account("myAccount", 2468, 4456564);
         int initialBalance = 10000;
         myAccount.deposit(initialBalance);
         int withdrawalAmount = 500;
