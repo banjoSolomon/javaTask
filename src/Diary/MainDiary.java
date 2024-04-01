@@ -11,58 +11,69 @@ public class MainDiary {
         Scanner scanner = new Scanner(System.in);
         System.out.println("WELCOME TO SEMICOLON DIARY");
 
-        System.out.println("Enter UserName for Diary 1:");
-        String userName1 = scanner.nextLine();
+        try {
 
-        System.out.println("Enter Password for Diary 1:");
-        String password1 = scanner.nextLine();
+            System.out.println("Enter UserName for Diary 1:");
+            String userName1 = scanner.nextLine();
 
-        diaries.addDiary(userName1, password1);
-
-
-        System.out.println("Enter UserName for Diary 2:");
-        String userName2 = scanner.nextLine();
-
-        System.out.println("Enter Password for Diary 2:");
-        String password2 = scanner.nextLine();
-
-        diaries.addDiary(userName2, password2);
+            String password1;
+            do {
+                System.out.println("Enter Password for Diary 1 (4 characters long):");
+                password1 = scanner.nextLine();
+            } while (password1.length() != 4);
+            diaries.addDiary(userName1, password1);
 
 
-        List<MyDiary> diaryList = diaries.getDiaries();
-        for (MyDiary diary : diaryList) {
-            System.out.println("Diary Details:");
-            System.out.println("UserName: " + diary.getUserName());
-            System.out.println("Password: " + diary.getPassword());
-            System.out.println("Is Locked: " + diary.isLocked());
+            System.out.println("Enter UserName for Diary 2:");
+            String userName2 = scanner.nextLine();
+
+            String password2;
+            do {
+                System.out.println("Enter Password for Diary 2 (4 characters long):");
+                password2 = scanner.nextLine();
+            } while (password2.length() != 4);
+            diaries.addDiary(userName2, password2);
 
 
-            System.out.println("Do you want to lock this diary? (yes/no):");
-            String lockChoice = scanner.nextLine();
-            if ("yes".equalsIgnoreCase(lockChoice)) {
-                diary.lockDiary();
-                System.out.println("Diary is now locked.");
-            }
+            List<MyDiary> diaryList = diaries.getDiaries();
+            for (MyDiary diary : diaryList) {
+                System.out.println("Diary Details:");
+                System.out.println("UserName: " + diary.getUserName());
+                System.out.println("Password: " + diary.getPassword());
+                System.out.println("Is Locked: " + diary.isLocked());
+
+                System.out.println("Do you want to lock this diary? (yes/no):");
+                String lockChoice = scanner.nextLine();
+                if ("yes".equalsIgnoreCase(lockChoice)) {
+                    diary.lockDiary();
+                    System.out.println("Diary is now locked.");
+                }
 
 
-            System.out.println("Enter Title for the new entry:");
-            String entryTitle = scanner.nextLine();
+                System.out.println("Enter Title for the new entry:");
+                String entryTitle = scanner.nextLine();
 
-            System.out.println("Enter Body for the new entry:");
-            String entryBody = scanner.nextLine();
+                System.out.println("Enter Body for the new entry:");
+                String entryBody = scanner.nextLine();
+
+                Entry newEntry = diary.createEntry(entryTitle, entryBody, diary.getEntries().size() + 1);
+                System.out.println("New Entry Created with ID: " + newEntry.getId());
 
 
-            Entry newEntry = diary.createEntry(entryTitle, entryBody, diary.getEntries().size() + 1);
-            System.out.println("New Entry Created with ID: " + newEntry.getId());
-
-            List<Entry> entries = diary.getEntries();
-            for (Entry entry : entries) {
-                System.out.println("Entry ID: " + entry.getId());
-                System.out.println("Entry Title: " + entry.getName());
-                System.out.println("Entry Body: " + entry.getBody());
-                System.out.println("Entry Date Created: " + entry.getDateCreated());
+                List<Entry> entries = diary.getEntries();
+                for (Entry entry : entries) {
+                    System.out.println("Entry ID: " + entry.getId());
+                    System.out.println("Entry Title: " + entry.getName());
+                    System.out.println("Entry Body: " + entry.getBody());
+                    System.out.println("Entry Date Created: " + entry.getDateCreated());
+                }
                 System.out.println("THANK U FOR USING SEMICOLON DIARY>>>>>>>>>APP STILL UNDER REFACTORING");
             }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            scanner.close();
         }
     }
 }

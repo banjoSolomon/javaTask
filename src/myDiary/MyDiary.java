@@ -10,6 +10,9 @@ public class MyDiary {
     private String password;
     private boolean isLocked = false;
     private List<Entry> entries;
+    private final int PASSWORDlENGTH = 4;
+
+
 
     public MyDiary(String userName, String password) {
         this.userName = userName;
@@ -23,6 +26,8 @@ public class MyDiary {
     }
 
     public void setPassword(String password) {
+        if (password.length() != PASSWORDlENGTH) throw new IllegalArgumentException("PIN should be four digit number");
+
         this.password = password;
     }
 

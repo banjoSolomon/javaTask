@@ -71,24 +71,18 @@ public class SevenSegment {
         for (int i = 0; i < value.length(); i++) {
             char bit = value.charAt(i);
             if (bit != '0' && bit != '1') {
-                throw new IllegalArgumentException("Input must be 0 or 1");
+                throw new IllegalArgumentException("Input must be a binary number (0 or 1)");
             }
 
             if (bit == '1') {
-                if (i == 0) {
-                    fillA();
-                } else if (i == 1) {
-                    fillB();
-                } else if (i == 2) {
-                    fillC();
-                } else if (i == 3) {
-                    fillD();
-                } else if (i == 4) {
-                    fillE();
-                } else if (i == 5) {
-                    fillF();
-                } else if (i == 6) {
-                    fillG();
+                switch (i) {
+                    case 0 -> fillA();
+                    case 1 -> fillB();
+                    case 2 -> fillC();
+                    case 3 -> fillD();
+                    case 4 -> fillE();
+                    case 5 -> fillF();
+                    case 6 -> fillG();
                 }
             }
         }
@@ -97,11 +91,15 @@ public class SevenSegment {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         SevenSegment display = new SevenSegment();
-        System.out.print("Enter binary number (up to 7 bits): ");
-        String value = scanner.nextLine();
-        inputValue(value);
-        display();
-        scanner.close();
+        try {
+            System.out.print("Enter binary number (up to 7 bits): ");
+            String value = scanner.nextLine();
+            inputValue(value);
+            display();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
     }
 }
-

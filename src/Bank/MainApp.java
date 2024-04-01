@@ -2,40 +2,37 @@ package Bank;
 
 import java.util.Scanner;
 
+
 public class MainApp {
     public static void main(String[] args) {
         mainMenu();
-
-
     }
 
     public static void mainMenu() {
         MyBank bank = new MyBank();
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
-        while (choice != 6) {
+        while (choice != 7) {
             printMainMenu();
-            System.out.print("Choose an option (1-6): ");
-            choice = scanner.nextInt();
-            if (choice == 1) {
-                openAccount(bank, scanner);
-            } else if (choice == 2) {
-                closeAccount(bank, scanner);
-            } else if (choice == 3) {
-                deposit(bank, scanner);
-            } else if (choice == 4) {
-                withdraw(bank, scanner);
-            } else if (choice == 5) {
-                transfer(bank, scanner);
-            } else if (choice == 6) {
-                checkBalance(bank, scanner);
-
-            } else if (choice == 7) {
-                System.out.println("Thank u for banking with us");
+            System.out.print("Choose an option (1-7): ");
+            try {
+                choice = scanner.nextInt();
+                switch (choice) {
+                    case 1 -> openAccount(bank, scanner);
+                    case 2 -> closeAccount(bank, scanner);
+                    case 3 -> deposit(bank, scanner);
+                    case 4 -> withdraw(bank, scanner);
+                    case 5 -> transfer(bank, scanner);
+                    case 6 -> checkBalance(bank, scanner);
+                    case 7 -> exit();
+                    default -> System.out.println("Invalid option. Please choose from 1 to 7.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a valid option.");
+                scanner.next();
             }
         }
-
-
+        scanner.close();
     }
 
     public static void printMainMenu() {
@@ -72,7 +69,7 @@ public class MainApp {
                 scanner.next();
             }
         }
-        int accountNumber = Account.getNextAccountNumber();
+        int accountNumber = generateAccountNumber();
         Account account = new Account(accountName, pin, accountNumber);
         bank.addAccount(account);
         System.out.println("Account opened successfully.");
@@ -160,6 +157,10 @@ public class MainApp {
         } else {
             System.out.println("Account not found.");
         }
+    }
 
+    public static void exit() {
+        System.out.println("Thank you for banking with us.");
+        System.exit(0);
     }
 }

@@ -1,4 +1,4 @@
-package OOP;
+package MyEstore;
 
 public enum CardType {
     MASTER_CARD,

@@ -51,9 +51,12 @@ public class QustionTest {
     }
 
     @Test
-    public void testDateOfBirth(){
+    public void testMinAndMax() {
+        int[] array = {2, 4, 5, 7, 8};
+        int[] expectedOutPut = {6};
+        assertArrayEquals(expectedOutPut, Qustion.MinAndMax(array));
 
-      //  assertEquals(1,Qustion.dateOfBirthCheck(12/12/2022));
+
     }
 
 }

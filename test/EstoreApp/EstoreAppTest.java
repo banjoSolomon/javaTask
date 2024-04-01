@@ -1,12 +1,10 @@
 package EstoreApp;
-
 import MyEstore.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
+
 
 public class EstoreAppTest {
     private Estore e_store;
@@ -27,7 +25,6 @@ public class EstoreAppTest {
     @Test
     public void testUserHasAUserName() {
         assertEquals("Banjo Solomon", e_store.getUserName());
-
     }
 
     @Test
@@ -38,7 +35,7 @@ public class EstoreAppTest {
     }
 
     @Test
-    public void testUserHasAPhoneNumber() {
+    public void testUserHasAEmail() {
         user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         assertEquals("Damseldee@gmail.com", user.getEmail());
 
@@ -131,7 +128,6 @@ public class EstoreAppTest {
         user = new User("Damsel Dee", "235", 24, "Damseldee@gmail.com", "7, adebare Street Ogudu lagos");
         e_store = new Estore("Banjo Solomon", "2468");
         product = new Product("Laptop", 799.99, 289, "This is a high performance gaming laptop.");
-        assertNotNull(product.getProductId());
         assertTrue(product.getProductId() > 0);
 
 
@@ -223,7 +219,7 @@ public class EstoreAppTest {
         List<Product> cartProducts = e_store.getCartProducts();
 
         assertEquals(1, cartProducts.size());
-        assertEquals(laptop, cartProducts.get(0));
+        assertEquals(laptop, cartProducts.getFirst());
 
     }
 
@@ -254,7 +250,6 @@ public class EstoreAppTest {
         } catch (Exception e) {
             fail("Unexpected exception was thrown: " + e.getClass().getSimpleName());
         }
-
         assertEquals(0, e_store.getProduct().size());
     }
 

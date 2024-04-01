@@ -41,7 +41,6 @@ public class Qustion {
     }
 
 
-
     public static boolean[] evenAndOddArray(int[] array) {
         boolean[] newArray = new boolean[array.length];
         int count = 0;
@@ -54,12 +53,38 @@ public class Qustion {
 
     public static int dateOfBirthCheck(String date) {
         LocalDate date1 = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yy"));
-        if(LocalDate.now().getDayOfYear() - date1.getDayOfYear() >= 0)
+        if (LocalDate.now().getDayOfYear() - date1.getDayOfYear() >= 0)
             return LocalDate.now().getDayOfYear();
-        return LocalDate.now().getYear() - date1.getYear()-1;
+        return LocalDate.now().getYear() - date1.getYear() - 1;
 
 
     }
 
+    public static int[] MinAndMax(int[] array) {
+        int max = array[0];
+        int min = array[0];
+        int[] newArray = new int[1];
 
+        for (int index : array) {
+            if (index > max) max = index;
+            if (index < min) min = index;
+        }
+
+        newArray[0] = max - min;
+        return newArray;
+
+    }
 }
+
+
+//public static int[] MinAndMax(int[] array) {
+//int sum = 0;
+//  for (int i : array) {
+//  sum += i;
+//}
+//int[] result = {Integer.MAX_VALUE, Integer.MIN_VALUE};
+//for (int count = 0; count < array.length; count++) {
+
+//}
+
+
