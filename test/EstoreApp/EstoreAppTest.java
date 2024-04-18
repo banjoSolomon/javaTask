@@ -101,7 +101,7 @@ public class EstoreAppTest {
         e_store.addProduct(product);
         List<Product> products = e_store.getProduct();
         assertEquals(1, products.size());
-        assertEquals(product, products.get(0));
+        assertEquals(product, products.getFirst());
 
     }
 
